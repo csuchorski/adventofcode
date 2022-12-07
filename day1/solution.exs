@@ -22,6 +22,8 @@ lines =
     [String.trim(line) | acc]
   end)
 
-Helper.group_sums(lines, 0, [])
-|> Enum.max()
-|> IO.puts()
+sums =
+  Helper.group_sums(lines, 0, [])
+  |> Enum.sort(&(&1 >= &2))
+
+IO.inspect(Enum.at(sums, 0) + Enum.at(sums, 1) + Enum.at(sums, 2))
