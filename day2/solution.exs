@@ -1,4 +1,7 @@
 defmodule Helper do
+  @first {"A", "B", "C"}
+  @second {"X", "Y", "Z"}
+
   def calculate([], acc), do: acc
 
   def calculate([a, b], acc) do
@@ -7,10 +10,26 @@ defmodule Helper do
   def calculate([head | tail], acc) do
   end
 
-  def calculate(enum, acc) do
-  end
+  #   def check_result(a, b) do
+  #     case {a, b} do
+  #       {?a} ->
+  #         :draw
 
-  def check_result(a, b) when a == b, do: :draw
+  #       {"A", "Y"} ->
+  #         :loss
+  #     end
+  #   end
+  # end
+
+  def check_result("A", "X"), do: :draw
+  def check_result("B", "Y"), do: :draw
+  def check_result("C", "Z"), do: :draw
+
+  def check_result("A", "Y"), do: :win
+  def check_result("B", "Z"), do: :win
+  def check_result("C", "X"), do: :win
+
+  def check_result(_, _), do: :loss
 end
 
 {:ok, binary} = File.read("./input.txt")
