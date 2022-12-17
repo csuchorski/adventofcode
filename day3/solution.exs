@@ -42,12 +42,13 @@ CrZsJsPPZsGzwwsLwLmpwMDw
 a = "vJrwpWtwJgWrhcsFMMfFFhFp"
 
 lines =
-  String.split(test, "\n", trim: true)
+  String.split(binary, "\n", trim: true)
   |> Enum.reduce([], fn line, acc ->
     [String.trim(line) | acc]
   end)
 
 IO.inspect(
   Helper.build_id_list(lines)
-  # |> Helper.map_id_to_number()
+  |> Helper.map_id_to_number()
+  |> Enum.sum()
 )
