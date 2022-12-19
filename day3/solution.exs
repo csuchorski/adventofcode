@@ -7,6 +7,18 @@ defmodule Helper do
     end)
   end
 
+  def build_id_list_pt2(lines, duplicates \\ [])
+
+  def build_id_list_pt2([], duplicates), do: duplicates
+
+  def build_id_list_pt2(lines, duplicates) do
+    {a, tail} = List.pop_at(lines, 0)
+    {b, tail} = List.pop_at(tail, 0)
+    {c, tail} = List.pop_at(tail, 0)
+
+    build_id_list_pt2(tail, find_duplicate_pt2(a, b, c) ++ duplicates)
+  end
+
   def find_duplicate(input) do
     input = String.split(input, "", trim: true)
 
@@ -19,6 +31,14 @@ defmodule Helper do
       |> MapSet.new()
 
     MapSet.intersection(map_set1, map_set2) |> MapSet.to_list()
+  end
+
+  defp find_duplicate_pt2(a, b, c) do
+    a = String.split(a, "", trim: true) |> MapSet.new()
+    b = String.split(b, "", trim: true) |> MapSet.new()
+    c = String.split(c, "", trim: true) |> MapSet.new()
+
+    MapSet.intersection(MapSet.intersection(a, b), c) |> MapSet.to_list()
   end
 
   def map_id_to_number(id_list) do
@@ -48,7 +68,7 @@ lines =
   end)
 
 IO.inspect(
-  Helper.build_id_list(lines)
+  Helper.build_id_list_pt2(lines)
   |> Helper.map_id_to_number()
   |> Enum.sum()
 )
