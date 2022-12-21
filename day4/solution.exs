@@ -31,10 +31,25 @@ defmodule Helper do
       check_range_overlap(tail, count)
     end
   end
+
+  def check_range_overlap_pt2([], count), do: count
+
+  def check_range_overlap_pt2([[a, b, c, d] | tail], count) do
+    a = String.to_integer(a)
+    b = String.to_integer(b)
+    c = String.to_integer(c)
+    d = String.to_integer(d)
+
+    if Range.disjoint?(a..b, c..d) do
+      check_range_overlap_pt2(tail, count)
+    else
+      check_range_overlap_pt2(tail, count + 1)
+    end
+  end
 end
 
 IO.inspect(
   Helper.split_by_lines("./input.txt")
   |> Helper.split_to_number()
-  |> Helper.check_range_overlap(0)
+  |> Helper.check_range_overlap_pt2(0)
 )
