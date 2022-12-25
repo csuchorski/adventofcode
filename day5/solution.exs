@@ -35,6 +35,12 @@ defmodule Helper do
 
     move_elem(tail, changed_stacks)
   end
+
+  def read_top_box(stacks) do
+    Enum.each(stacks, fn stack ->
+      IO.write(Enum.at(stack, 0))
+    end)
+  end
 end
 
 stacks = [
@@ -69,4 +75,5 @@ IO.inspect(
   Helper.split_by_lines(binary)
   |> Helper.split_to_tuples()
   |> Helper.move_elem(stacks)
+  |> Helper.read_top_box()
 )
