@@ -36,6 +36,19 @@ defmodule Helper do
     move_elem(tail, changed_stacks)
   end
 
+  def move_elem_pt2([], stacks), do: stacks
+
+  def move_elem_pt2([{count, from, to} | tail], stacks) do
+    {moved_boxes, stack_from} = Enum.split(Enum.at(stacks, from - 1), count)
+    stack_to = moved_boxes ++ Enum.at(stacks, to - 1)
+
+    changed_stacks =
+      List.replace_at(stacks, from - 1, stack_from)
+      |> List.replace_at(to - 1, stack_to)
+
+    move_elem_pt2(tail, changed_stacks)
+  end
+
   def read_top_box(stacks) do
     Enum.each(stacks, fn stack ->
       IO.write(Enum.at(stack, 0))
@@ -74,6 +87,6 @@ path = "input.txt"
 IO.inspect(
   Helper.split_by_lines(binary)
   |> Helper.split_to_tuples()
-  |> Helper.move_elem(stacks)
+  |> Helper.move_elem_pt2(stacks)
   |> Helper.read_top_box()
 )
