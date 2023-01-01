@@ -140,6 +140,21 @@ defmodule Helper do
     Map.values(result_map)
     |> Enum.count(fn element -> element == true end)
   end
+
+  def calculate_view_distance_left(result_map, tree_map) do
+  end
+
+  def calculate_view_distance_right(result_map, tree_map) do
+  end
+
+  def calculate_view_distance_top(result_map, tree_map) do
+  end
+
+  def calculate_view_distance_bot(result_map, tree_map) do
+  end
+
+  def calculate_scenic_score(result_map) do
+  end
 end
 
 test_binary = """
